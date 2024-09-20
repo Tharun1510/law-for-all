@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 Game</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .screen {
+            position: relative;
+            text-align: center;
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .background-image {
+            width: 100%;
+            height: auto;
+        }
+
+        button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+
+        .popup {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .popup-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .character {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .cloud {
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pop-up message for school problems -->
+    <div id="popup1" class="popup">
+        <div class="popup-content">
+            <img src="cute-lady.png" alt="Lady" class="character">
+            <div class="cloud">This school has lots of problems, so you need to fix the problems.</div>
+        </div>
+    </div>
+
+    <!-- School gate image with Enter button -->
+    <div id="gate-screen" class="screen active">
+        <img src="school-gate.jpg" alt="School Gate" class="background-image">
+        <button id="enter-gate">Enter</button>
+    </div>
+
+    <!-- Outside classroom screen -->
+    <div id="classroom-screen" class="screen hidden">
+        <img src="outside-classroom.jpg" alt="Outside Classroom" class="background-image">
+        <button id="enter-classroom">Enter</button>
+    </div>
+
+    <!-- Caste-related circumstances screen -->
+    <div id="caste-screen" class="screen hidden">
+        <img src="student-stand.jpg" alt="Student Standing" class="background-image">
+        <button id="open-rules">Rules</button>
+        <div id="rules-popup" class="hidden">
+            <h3>Rules</h3>
+            <label for="caste-toggle">Caste discrimination:</label>
+            <input type="checkbox" id="caste-toggle">
+            <button id="submit-rules">Submit</button>
+        </div>
+    </div>
+
+    <!-- Video screen -->
+    <div id="video-screen" class="screen hidden">
+        <video controls>
+            <source src="your-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        // Handle pop-up close
+        document.getElementById('popup1').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('gate-screen').classList.add('active');
+        });
+
+        // Handle gate entry
+        document.getElementById('enter-gate').addEventListener('click', function() {
+            alert('Ohh, the bell is ringing');
+            document.getElementById('gate-screen').classList.remove('active');
+            document.getElementById('classroom-screen').classList.add('active');
+        });
+
+        // Handle classroom entry
+        document.getElementById('enter-classroom').addEventListener('click', function() {
+            alert('A student is standing due to caste-related circumstances');
+            document.getElementById('classroom-screen').classList.remove('active');
+            document.getElementById('caste-screen').classList.add('active');
+        });
+
+        // Handle rules popup
+        document.getElementById('open-rules').addEventListener('click', function() {
+            alert('You are going to solve these circumstances through the rules');
+            document.getElementById('rules-popup').classList.remove('hidden');
+        });
+
+        // Handle rule submission
+        document.getElementById('submit-rules').addEventListener('click', function() {
+            if (document.getElementById('caste-toggle').checked) {
+                alert('Wow, you have finished the level and solved the discrimination between them');
+                document.getElementById('caste-screen').classList.remove('active');
+                document.getElementById('video-screen').classList.add('active');
+            } else {
+                alert('Please turn on caste discrimination to solve the issue.');
+            }
+        });
+    </script>
+
+</body>
+</html>
